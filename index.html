@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tarun Krishna Vankena — Java Backend Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#050816;
+  --card:#0d1224;
+  --card2:#131a31;
+  --accent:#7c3aed;
+  --accent2:#38bdf8;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --line:#1e293b;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Space Grotesk',sans-serif;
+  background:radial-gradient(circle at top,#111827 0%,#050816 45%);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:.2;
+  pointer-events:none;
+}
+
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:22px 80px;
+  z-index:100;
+  background:rgba(5,8,22,.75);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.logo{
+  font-size:1rem;
+  font-weight:700;
+}
+
+.logo span{
+  color:var(--accent2);
+}
+
+.nav-links{
+  display:flex;
+  gap:32px;
+}
+
+.nav-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.95rem;
+}
+
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  align-items:center;
+  gap:40px;
+  padding:120px 80px 60px;
+}
+
+.hero-left h1{
+  font-size:5.8rem;
+  line-height:.95;
+  margin-bottom:20px;
+}
+
+.hero-left h1 span{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.6);
+}
+
+.hero-tag{
+  display:inline-flex;
+  gap:12px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
+}
+
+.tag{
+  padding:10px 18px;
+  background:rgba(124,58,237,.12);
+  border:1px solid rgba(124,58,237,.35);
+  border-radius:100px;
+  font-size:.85rem;
+  color:#c4b5fd;
+}
+
+.hero-desc{
+  max-width:700px;
+  color:var(--muted);
+  line-height:1.9;
+  font-size:1.05rem;
+  margin-bottom:36px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:16px 30px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:700;
+  transition:.3s;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:white;
+  box-shadow:0 10px 40px rgba(56,189,248,.2);
+}
+
+.btn-primary:hover{
+  transform:translateY(-4px);
+}
+
+.btn-secondary{
+  border:1px solid rgba(255,255,255,.12);
+  color:white;
+}
+
+.hero-right{
+  position:relative;
+}
+
+.glow{
+  position:absolute;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  filter:blur(120px);
+  opacity:.4;
+  top:20%;
+  left:20%;
+}
+
+.code-card{
+  position:relative;
+  background:rgba(13,18,36,.9);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:24px;
+  padding:28px;
+  backdrop-filter:blur(16px);
+  box-shadow:0 10px 40px rgba(0,0,0,.4);
+}
+
+.code-top{
+  display:flex;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+}
+
+.dot:nth-child(1){background:#ef4444;}
+.dot:nth-child(2){background:#f59e0b;}
+.dot:nth-child(3){background:#22c55e;}
+
+.code{
+  font-family:'JetBrains Mono',monospace;
+  color:#93c5fd;
+  line-height:2;
+  font-size:.95rem;
+}
+
+section{
+  padding:110px 80px;
+}
+
+.section-title{
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.section-sub{
+  color:var(--muted);
+  margin-bottom:50px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+
+.stat-card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:22px;
+  padding:32px;
+  transition:.3s;
+}
+
+.stat-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(56,189,248,.3);
+}
+
+.stat-card h3{
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
+
+.stat-card p{
+  color:var(--muted);
+}
+
+.timeline{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.exp-card{
+  background:linear-gradient(180deg,var(--card),var(--card2));
+  border:1px solid rgba(255,255,255,.06);
+  padding:34px;
+  border-radius:24px;
+}
+
+.exp-card h3{
+  font-size:1.7rem;
+  margin-bottom:8px;
+}
+
+.exp-role{
+  color:#c4b5fd;
+  margin-bottom:18px;
+}
+
+.exp-card ul{
+  padding-left:20px;
+  color:var(--muted);
+  line-height:1.9;
+}
+
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.skill-card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:24px;
+  padding:30px;
+}
+
+.skill-card h3{
+  margin-bottom:18px;
+}
+
+.skill-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.skill-tags span{
+  background:#111827;
+  border:1px solid rgba(255,255,255,.08);
+  color:#cbd5e1;
+  padding:10px 14px;
+  border-radius:100px;
+  font-size:.85rem;
+}
+
+.projects{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:28px;
+}
+
+.project-card{
+  background:linear-gradient(180deg,var(--card),#0b1020);
+  border-radius:28px;
+  padding:34px;
+  border:1px solid rgba(255,255,255,.06);
+  position:relative;
+  overflow:hidden;
+}
+
+.project-card::before{
+  content:'';
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  filter:blur(100px);
+  opacity:.15;
+  top:-80px;
+  right:-80px;
+}
+
+.project-card h3{
+  font-size:1.7rem;
+  margin-bottom:18px;
+  position:relative;
+}
+
+.project-card p{
+  color:var(--muted);
+  line-height:1.9;
+  margin-bottom:20px;
+  position:relative;
+}
+
+.project-stack{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  position:relative;
+}
+
+.project-stack span{
+  padding:9px 14px;
+  background:#0f172a;
+  border-radius:100px;
+  border:1px solid rgba(255,255,255,.06);
+  font-size:.82rem;
+}
+
+.contact{
+  text-align:center;
+}
+
+.contact h2{
+  font-size:4rem;
+  margin-bottom:20px;
+}
+
+.contact p{
+  max-width:700px;
+  margin:0 auto 40px;
+  color:var(--muted);
+  line-height:1.9;
+}
+
+.contact-links{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.contact-links a{
+  padding:16px 24px;
+  border-radius:14px;
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.06);
+  color:white;
+  text-decoration:none;
+}
+
+footer{
+  padding:40px;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.05);
+}
+
+@media(max-width:980px){
+  .hero,
+  .projects,
+  .skills-grid,
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  nav,
+  section,
+  .hero{
+    padding-left:24px;
+    padding-right:24px;
+  }
+
+  .hero-left h1{
+    font-size:3.8rem;
+  }
+
+  .nav-links{
+    display:none;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Tarun <span>Krishna</span></div>
+
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+
+    <div class="hero-tag">
+      <div class="tag">Java Backend</div>
+      <div class="tag">Distributed Systems</div>
+      <div class="tag">Spring Boot</div>
+    </div>
+
+    <h1>
+      TARUN <br>
+      <span>KRISHNA VANKENA</span>
+    </h1>
+
+    <p class="hero-desc">
+      Software Engineer with 2+ years of experience building scalable enterprise banking systems and distributed backend applications using Java, Spring Boot, Kafka, REST APIs, Docker, and Microservices.
+      
+      Currently working at Oracle Financial Services Software focusing on enterprise backend engineering, production deployments, and high-volume transaction systems.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">Explore Projects</a>
+      <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="glow"></div>
+
+    <div class="code-card">
+      <div class="code-top">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+
+      <div class="code">
+        class BackendEngineer {<br>
+        &nbsp;&nbsp;stack = ["Java", "Spring Boot", "Kafka"]<br>
+        &nbsp;&nbsp;focus = "Distributed Systems"<br>
+        &nbsp;&nbsp;experience = "2+ Years"<br>
+        &nbsp;&nbsp;company = "Oracle Financial Services"<br>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Engineering Impact</h2>
+  <p class="section-sub">Building enterprise-grade backend systems with scalability and performance in mind.</p>
+
+  <div class="stats">
+    <div class="stat-card">
+      <h3>2+</h3>
+      <p>Years Experience</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>10+</h3>
+      <p>Banking Modules Delivered</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>300+</h3>
+      <p>LeetCode Problems</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>60%</h3>
+      <p>Efficiency Improvement</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <h2 class="section-title">Experience</h2>
+  <p class="section-sub">Enterprise backend engineering experience across banking systems and scalable applications.</p>
+
+  <div class="timeline">
+
+    <div class="exp-card">
+      <h3>Oracle Financial Services Software</h3>
+      <div class="exp-role">Software Engineer • Aug 2024 – Present • Hyderabad</div>
+
+      <ul>
+        <li>Delivered 10+ banking service modules supporting high-volume customer interactions.</li>
+        <li>Worked on scalable backend systems, APIs, deployments, and enterprise integrations.</li>
+        <li>Customized Oracle FLEXCUBE modules improving efficiency by 60%.</li>
+        <li>Contributed to production deployment cycles and backend optimization.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <h3>Appstrail Technology</h3>
+      <div class="exp-role">Salesforce Developer Intern • Mar 2024 – Jul 2024 • Bangalore</div>
+
+      <ul>
+        <li>Automated CRM workflows reducing manual operations by 40%.</li>
+        <li>Built REST API integrations enabling real-time synchronization.</li>
+        <li>Optimized validation logic reducing latency by 35%.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">Tech Stack</h2>
+  <p class="section-sub">Backend engineering, distributed systems, enterprise tooling, and scalable architecture.</p>
+
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <h3>Backend Engineering</h3>
+      <div class="skill-tags">
+        <span>Java</span>
+        <span>Spring Boot</span>
+        <span>REST APIs</span>
+        <span>Microservices</span>
+        <span>Hibernate</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h3>Databases & Systems</h3>
+      <div class="skill-tags">
+        <span>MySQL</span>
+        <span>Oracle SQL</span>
+        <span>Kafka</span>
+        <span>Distributed Systems</span>
+        <span>System Design</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <h3>Tools & Platforms</h3>
+      <div class="skill-tags">
+        <span>Docker</span>
+        <span>Git</span>
+        <span>Jenkins</span>
+        <span>CI/CD</span>
+        <span>Oracle FLEXCUBE</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <h2 class="section-title">Featured Projects</h2>
+  <p class="section-sub">Production-style backend projects focused on scalability and performance.</p>
+
+  <div class="projects">
+
+    <div class="project-card">
+      <h3>Logistics Management System</h3>
+
+      <p>
+        Architected an end-to-end shipment lifecycle management system using Spring Boot microservices and Kafka for real-time shipment tracking, routing, and delivery workflows.
+      </p>
+
+      <div class="project-stack">
+        <span>Java</span>
+        <span>Spring Boot</span>
+        <span>Kafka</span>
+        <span>MySQL</span>
+        <span>REST APIs</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h3>Scalable Bidding & Auction System</h3>
+
+      <p>
+        Built a real-time auction platform handling concurrent bids from 100+ users with optimistic locking and sub-second bid updates.
+      </p>
+
+      <div class="project-stack">
+        <span>Java</span>
+        <span>Spring Boot</span>
+        <span>MySQL</span>
+        <span>Concurrency</span>
+        <span>REST APIs</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">Certifications & Achievements</h2>
+
+  <div class="projects">
+
+    <div class="project-card">
+      <h3>Certifications</h3>
+
+      <p>
+        • Red Hat Certified Enterprise Application Developer<br><br>
+        • Oracle Cloud Infrastructure 2023 Certified Multicloud Architect Associate
+      </p>
+    </div>
+
+    <div class="project-card">
+      <h3>Achievements</h3>
+
+      <p>
+        • Solved 300+ LeetCode problems<br><br>
+        • Published IoT-based Smart Agriculture research project<br><br>
+        • Strong focus on scalable backend engineering and distributed systems
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Let's Build Something Great</h2>
+
+  <p>
+    Open to Software Engineer and Java Backend opportunities focused on scalable systems, enterprise applications, and distributed backend engineering.
+  </p>
+
+  <div class="contact-links">
+    <a href="mailto:tarunkrishna13579@gmail.com">Email</a>
+    <a href="https://linkedin.com/in/Tarun-Krishna-Vankena" target="_blank">LinkedIn</a>
+    <a href="https://github.com/tarunkrisha13579-hash">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  Designed & Engineered by Tarun Krishna Vankena
+</footer>
+
+</body>
+</html>
